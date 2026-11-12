@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Canteen</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,Arial,sans-serif}
+h1,h2,h3,.logo{font-family:'Baloo 2',Poppins,sans-serif}
+:root{--bg:#f6faf3;--card:#fff;--tx:#10331f;--pri:#15803d;--acc:#f59e0b;--dk:#0f3d24;--soft:#e4f5e8;--bd:#cfe9d6;--mut:#5b7a66;--hdr:#0f3d24;--sh:0 8px 24px rgba(16,51,31,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#09150e;--card:#10251a;--tx:#e2f7e8;--pri:#34d399;--dk:#0b2e1b;--soft:#16351f;--bd:#23523a;--mut:#8dbf9f;--hdr:#0a2415;--sh:0 8px 24px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#09150e;--card:#10251a;--tx:#e2f7e8;--pri:#34d399;--dk:#0b2e1b;--soft:#16351f;--bd:#23523a;--mut:#8dbf9f;--hdr:#0a2415;--sh:0 8px 24px rgba(0,0,0,.4)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hdr);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--hdr);color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 22px;box-shadow:0 2px 14px #0004}
+.logo{font-weight:800;font-size:24px;cursor:pointer}
+nav{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+nav button{background:rgba(255,255,255,.12);color:#fff;border:0;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:500;transition:.2s}
+nav button:hover{background:var(--acc);color:#000}
+.bd{background:var(--acc);color:#000;border-radius:10px;padding:0 7px;margin-left:5px;font-size:12px}
+main{max-width:1150px;margin:0 auto;padding:22px 16px;min-height:60vh}
+.card{background:var(--card);padding:24px;border-radius:18px;margin-bottom:18px;box-shadow:var(--sh)}
+h2,h3{color:var(--pri);margin-bottom:10px}
+h2{font-size:28px}
+input,select{width:100%;padding:12px 14px;margin:6px 0 14px;border:1.5px solid var(--bd);border-radius:12px;background:var(--card);color:var(--tx)}
+input:focus,select:focus{border-color:var(--pri);outline:0}
+label{font-weight:600}
+.btn{background:var(--pri);color:#fff;border:0;padding:11px 22px;border-radius:12px;cursor:pointer;margin:4px;font-weight:600;transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn.o{background:transparent;color:var(--pri);border:2px solid var(--pri)}
+.btn.a{background:var(--acc);color:#1a1a1a}
+.link{color:var(--pri);background:none;border:0;text-decoration:underline;cursor:pointer;margin:8px 4px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;background:linear-gradient(135deg,#0f3d24,#15803d 60%,#34d399);color:#fff;border-radius:28px;padding:48px;margin-bottom:22px;box-shadow:var(--sh)}
+.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin-bottom:14px;color:#fff}
+.hero h1 span{color:#fde68a}
+.hero p{margin-bottom:18px;opacity:.95;max-width:480px}
+.hero .btn{background:#fff;color:#0f3d24}.hero .btn.a{background:var(--acc);color:#1a1a1a}
+.hero .btn.o{background:transparent;color:#fff;border-color:#fff}
+.hs{display:flex;gap:8px;background:#fff;border-radius:16px;padding:6px;max-width:460px;margin-bottom:14px}
+.hs input{margin:0;border:0;color:#10331f;background:#fff}.hs .btn{margin:0}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pills span{background:rgba(255,255,255,.18);padding:6px 12px;border-radius:20px;font-size:13px}
+.col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.col .fl:nth-child(even){transform:translateY(22px)}
+.fl{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 10px 26px #0004;color:var(--tx)}
+.fl .ph{height:120px}
+.fl span{display:block;padding:8px 10px;font-size:13px;font-weight:600}
+.strip{background:var(--acc);color:#1a1a1a;border-radius:14px;padding:12px 18px;text-align:center;font-weight:600;margin-bottom:22px}
+.sec{margin:30px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:18px}
+.grid>.card{margin:0}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px}
+.cats button{background:var(--card);border:0;border-radius:18px;padding:18px 8px;cursor:pointer;box-shadow:var(--sh);color:var(--tx);font-weight:600;font-size:15px;transition:.2s}
+.cats button:hover{transform:translateY(-4px);background:var(--soft)}
+.cats i{display:block;font-style:normal;font-size:38px;margin-bottom:6px}
+.num{width:38px;height:38px;border-radius:50%;background:var(--acc);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 10px}
+.food{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--sh);position:relative;transition:.25s}
+.food:hover{transform:translateY(-6px)}
+.food:hover .ph img{transform:scale(1.08)}
+.fb{padding:14px}
+.ph{height:175px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:66px;background:linear-gradient(135deg,hsl(var(--h) 70% 85%),hsl(var(--h) 65% 68%))}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.tag{position:absolute;top:10px;left:10px;background:var(--acc);color:#000;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px;z-index:2}
+.ht{position:absolute;top:8px;right:8px;z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:#fffd;color:#e11d48;font-size:18px;cursor:pointer}
+.food h3{margin:0 0 4px;font-size:19px}
+.price{color:var(--pri);font-size:22px;font-weight:700;margin:6px 0}
+.mt{color:var(--mut);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+.chips button{padding:8px 16px;background:var(--soft);color:var(--tx);border:0;border-radius:20px;cursor:pointer;font-weight:500}
+.chips button.on{background:var(--pri);color:#fff}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{padding:10px;border:1px solid var(--bd);text-align:center}
+th{background:var(--dk);color:#fff}
+.danger{background:#dc2626;color:#fff;border:0;padding:7px 10px;border-radius:8px;cursor:pointer}
+.q{width:28px;height:28px;border-radius:50%;border:1px solid var(--pri);background:var(--card);color:var(--pri);cursor:pointer}
+.veg{display:inline-block;width:14px;height:14px;border:2px solid #16a34a;border-radius:3px;position:relative;vertical-align:middle}
+.veg::after{content:"";position:absolute;inset:2px;border-radius:50%;background:#16a34a}
+.veg.n{border-color:#dc2626}.veg.n::after{background:#dc2626}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.st{padding:5px 12px;border-radius:20px;background:var(--soft);font-size:13px;opacity:.6}
+.st.on{background:var(--pri);color:#fff;opacity:1}
+.stat{text-align:center}
+.cta{background:linear-gradient(135deg,#0f3d24,#15803d);color:#fff;text-align:center;border-radius:24px;padding:36px 20px;margin-top:26px}
+.cta h2{color:#fff}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 22px;border-radius:25px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:20;max-width:90%;text-align:center}
+#toast.on{opacity:1}
+footer{background:var(--hdr);color:#fff;text-align:center;padding:22px;margin-top:20px}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding:28px 20px}.col .fl:nth-child(even){transform:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{header,footer,.np{display:none!important}}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo" onclick="go(admin?'admin':me?'home':'launch')">🌿 Digital Canteen</div>
+ <nav id="nav"></nav>
+</header>
+<main id="app"></main>
+<footer>© 2026 Digital Canteen Management System · Fresh food, fast service</footer>
+<div id="toast"></div>
+<script>
+const $=s=>document.getElementById(s);
+const get=(k,d=[])=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
+const set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let me=get('currentUser',''),admin=false,cat='All',coupon='',cur='launch',pre='',tt;
+const CATS=['Breakfast','Lunch','Dinner','Snacks','Drinks','Desserts'];
+const CE=['🥞','🍛','🫓','🍟','☕','🍨'];
+const ST=['Confirmed','Preparing','Ready','Completed'];
+const FOODS=`Idly|30|Breakfast|🍚
+Dosa|40|Breakfast|🥞
+Masala Dosa|55|Breakfast|🥞
+Pongal|45|Breakfast|🍲
+Poori|50|Breakfast|🫓
+Vada|20|Breakfast|🍩
+Upma|35|Breakfast|🍲
+Meals|80|Lunch|🍛
+Veg Biryani|90|Lunch|🍛
+Chicken Biryani|130|Lunch|🍗
+Veg Fried Rice|70|Lunch|🍚
+Curd Rice|40|Lunch|🍚
+Lemon Rice|40|Lunch|🍋
+Sambar Rice|50|Lunch|🍲
+Veg Noodles|65|Lunch|🍜
+Parotta|50|Dinner|🫓
+Chapati|40|Dinner|🫓
+Kothu Parotta|80|Dinner|🍳
+Chilli Parotta|75|Dinner|🌶
+Samosa|15|Snacks|🥟
+Veg Puff|20|Snacks|🥐
+French Fries|50|Snacks|🍟
+Burger|60|Snacks|🍔
+Pizza|120|Snacks|🍕
+Sandwich|45|Snacks|🥪
+Tea|15|Drinks|🍵
+Coffee|20|Drinks|☕
+Lemon Juice|25|Drinks|🍋
+Milkshake|60|Drinks|🥤
+Badam Milk|35|Drinks|🥛
+Gulab Jamun|30|Desserts|🍡
+Ice Cream|40|Desserts|🍨
+Payasam|35|Desserts|🍮
+Brownie|55|Desserts|🍫`.split('\n').map((l,i)=>{const[a,b,c,d]=l.split('|');return{id:i+1,name:a,price:+b,category:c,emoji:d,veg:a!=='Chicken Biryani'}});
+const IMG={"Idly":"1589301760014-d929f3979dbc","Dosa":"1668236543090-82eba5ee5976","Masala Dosa":"1668236543090-82eba5ee5976","Veg Biryani":"1563379091339-03b21ab4a4f8","Chicken Biryani":"1563379091339-03b21ab4a4f8","Burger":"1568901346375-23c9450c58cd","Pizza":"1565299624946-b28f40a0ae38","French Fries":"1573080496219-bb080dd4f877","Coffee":"1509042239860-f550ce710b93","Tea":"1576092768241-dec231879fc3","Ice Cream":"1563805042-7684c019e1cb","Sandwich":"1528735602780-2552fd46c7af"};
+const KW={"Idly":"idli","Dosa":"dosa","Masala Dosa":"dosa","Pongal":"pongal","Poori":"poori","Vada":"vada","Upma":"upma","Meals":"thali","Veg Biryani":"biryani","Chicken Biryani":"biryani","Veg Fried Rice":"rice","Curd Rice":"rice","Lemon Rice":"rice","Sambar Rice":"sambar","Veg Noodles":"noodles","Parotta":"paratha","Chapati":"chapati","Kothu Parotta":"paratha","Chilli Parotta":"paratha","Samosa":"samosa","Veg Puff":"puff","French Fries":"fries","Burger":"burger","Pizza":"pizza","Sandwich":"sandwich","Tea":"tea","Coffee":"coffee","Lemon Juice":"lemonade","Milkshake":"milkshake","Badam Milk":"milk","Gulab Jamun":"gulab","Payasam":"kheer","Ice Cream":"icecream","Brownie":"brownie"};
+const POP=[3,9,23,24,27,32];
+if(!get('foods').length)set('foods',FOODS);
+
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
+function theme(){const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark'}
+const cart=()=>me?get('cart_'+me):[];
+const saveCart=c=>{set('cart_'+me,c);nav()};
+const favs=()=>me?get('fav_'+me):[];
+const stepper=o=>`<div class="steps">${ST.map((s,i)=>`<span class="st ${i<=ST.indexOf(o.status)?'on':''}">${s}</span>`).join('')}</div>`;
+const pop=()=>get('foods').filter(f=>POP.includes(f.id));
+function calc(c){const s=c.reduce((a,i)=>a+i.price*i.quantity,0),d=coupon==='CANTEEN10'?Math.round(s*.1):0,g=Math.round((s-d)*.05);return{s,d,g,t:s-d+g}}
+function tile(f){
+ const slug=f.name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),
+ kw=KW[f.name]||encodeURIComponent(f.name.split(' ')[0].toLowerCase()),
+ list=[
+  f.img&&/^https:/.test(f.img)?f.img:'',
+  'images/'+slug+'.jpg',
+  IMG[f.name]?'https://images.unsplash.com/photo-'+IMG[f.name]+'?w=600':'',
+  'https://loremflickr.com/600/450/'+kw+'?lock='+f.id
+ ].filter(Boolean);
+ return `<div class="ph" style="--h:${(f.id*47)%360}">${f.emoji||'🍽'}<img src="${esc(list[0])}" data-l='${esc(JSON.stringify(list.slice(1)))}' alt="${esc(f.name)}" loading="lazy" onerror="nx(this)"></div>`}
+function nx(i){const l=JSON.parse(i.dataset.l||'[]');if(l.length){i.dataset.l=JSON.stringify(l.slice(1));i.src=l[0]}else i.remove()}
+const card=f=>`<div class="food">${POP.includes(f.id)?'<span class="tag">⭐ Bestseller</span>':''}<button class="ht" onclick="fav(${f.id})" aria-label="Favourite">${favs().includes(f.id)?'♥':'♡'}</button>${tile(f)}<div class="fb"><h3><span class="veg ${f.veg===false?'n':''}"></span> ${esc(f.name)}</h3><p class="mt">${f.category} · ⭐ ${(4+f.id%10/10).toFixed(1)} · 10 min</p><p class="price">₹${f.price}</p><button class="btn" style="width:100%;margin:0" onclick="add(${f.id})">Add to cart</button></div></div>`;
+
+function nav(){const n=$('nav'),tg='<button onclick="theme()" aria-label="Toggle theme">🌓</button>';
+ if(admin)n.innerHTML=`<button onclick="go('admin')">Dashboard</button><button onclick="logout()">Logout</button>${tg}`;
+ else if(me){const c=cart().reduce((s,i)=>s+i.quantity,0);n.innerHTML=`<button onclick="go('home')">Home</button><button onclick="go('menu')">Menu</button><button onclick="go('cart')">Cart 🛒<b class="bd">${c}</b></button><button onclick="go('history')">Orders</button><button onclick="logout()">Logout</button>${tg}`}
+ else n.innerHTML=`<button onclick="go('launch')">Home</button><button onclick="go('login')">Login</button><button onclick="go('register')">Register</button>${tg}`}
+
+const PRIV=['home','menu','cart','payment','history','bill'];
+function go(p){if(PRIV.includes(p)&&!me)p='login';if(p==='admin'&&!admin)p='adminLogin';cur=p;nav();$('app').innerHTML=V[p]();window.scrollTo(0,0);if(p==='menu')showFoods()}
+function search(){pre=$('hq').value;cat='All';go(me?'menu':'login')}
+
+const V={
+launch(){const col=[9,23,32,3].map(id=>get('foods').find(f=>f.id===id)).filter(Boolean).map(f=>`<div class="fl">${tile(f)}<span>${esc(f.name)} · ₹${f.price}</span></div>`).join('');
+return `<section class="hero"><div><h1>Fresh food.<br><span>Zero waiting.</span></h1><p>Order breakfast, lunch, snacks and drinks from your canteen. Pay online, track your order and pick it up when it’s ready.</p><div class="hs"><input id="hq" placeholder="Search biryani, dosa, coffee..." onkeydown="if(event.key==='Enter')search()"><button class="btn a" onclick="search()">Search</button></div><button class="btn a" onclick="go('${me?'menu':'register'}')">${me?'Browse menu':'Get started'}</button><button class="btn o" onclick="go('${me?'home':'login'}')">${me?'My dashboard':'Login'}</button><div class="pills"><span>⚡ Ready in 10 min</span><span>🌿 34+ dishes</span><span>🎟 10% off</span></div></div><div class="col">${col}</div></section>
+<div class="strip">🎟 Use code CANTEEN10 for 10% off your order</div>
+<h2 class="sec">Browse by category</h2><div class="cats">${CATS.map((c,i)=>`<button onclick="cat='${c}';go('${me?'menu':'login'}')"><i>${CE[i]}</i>${c}</button>`).join('')}</div>
+<h2 class="sec">How it works</h2><div class="grid">${[['Pick your food','Browse the menu and add dishes to your cart'],['Pay your way','UPI, card or cash at the counter'],['Pick it up','Track your order and collect it when it’s ready']].map((x,i)=>`<div class="card stat"><div class="num">${i+1}</div><h3>${x[0]}</h3><p class="mt">${x[1]}</p></div>`).join('')}</div>
+<h2 class="sec">🔥 Popular dishes</h2><div class="grid">${pop().map(card).join('')}</div>
+<div class="cta"><h2>Hungry already?</h2><p style="margin-bottom:14px">Your next meal is a few taps away.</p><button class="btn a" onclick="go('${me?'menu':'register'}')">Order now</button></div>`},
+register(){return `<div class="card" style="max-width:480px;margin:auto"><h2>📝 Create account</h2><form onsubmit="reg(event)"><label>Full name</label><input id="rn" required placeholder="Enter your name"><label>Email</label><input id="re" type="email" required placeholder="Enter email"><label>Password</label><input id="rp" type="password" required minlength="4" placeholder="Create password"><button class="btn">Register</button></form><p>Already have an account?</p><button class="link" onclick="go('login')">Login here</button></div>`},
+login(){return `<div class="card" style="max-width:480px;margin:auto"><h2>🔐 Login</h2><form onsubmit="login(event)"><label>Email</label><input id="le" type="email" required><label>Password</label><input id="lp" type="password" required><button class="btn">Login</button></form><p>Don’t have an account?</p><button class="link" onclick="go('register')">Register here</button><br><button class="link" onclick="go('adminLogin')">Admin login</button></div>`},
+adminLogin(){return `<div class="card" style="max-width:480px;margin:auto"><h2>⚙️ Admin login</h2><form onsubmit="adminLogin(event)"><label>Username</label><input id="an" required><label>Password</label><input id="ap" type="password" required><button class="btn">Login as admin</button></form><button class="link" onclick="go('login')">Back to login</button></div>`},
+home(){const u=get('users').find(x=>x.email===me),last=get('orders').filter(o=>o.user===me).pop();return `<section class="hero" style="grid-template-columns:1fr"><div><h1 style="font-size:40px">Hello, ${esc(u?u.name:'there')} 👋</h1><p>What would you like to eat today?</p><button class="btn a" onclick="go('menu')">Explore menu</button><button class="btn o" onclick="go('history')">My orders</button></div></section>${last?`<div class="card"><h3>Latest order ${last.token||''}</h3>${stepper(last)}<button class="btn o" onclick="go('history')">All orders</button></div>`:''}<h2 class="sec">🔥 Popular today</h2><div class="grid">${pop().map(card).join('')}</div>`},
+menu(){return `<div class="card"><h2>🍴 Food menu</h2><input id="q" value="${esc(pre)}" placeholder="Search your favourite food..." oninput="pre=this.value;showFoods()"><div class="chips">${['All','Favourites',...CATS].map(c=>`<button class="${c===cat?'on':''}" onclick="cat='${c}';go('menu')">${c}</button>`).join('')}</div><div class="row"><select id="sort" onchange="showFoods()"><option value="">Sort: default</option><option value="l">Price: low to high</option><option value="h">Price: high to low</option></select><select id="vf" onchange="showFoods()"><option value="">Veg and non-veg</option><option value="v">Veg only</option></select></div></div><div id="fd" class="grid"></div>`},
+cart(){const c=cart();if(!c.length)return `<div class="card"><h2>🛒 Your cart</h2><p>Your cart is empty. Add something tasty from the menu.</p><button class="btn" onclick="go('menu')">Go to menu</button></div>`;const k=calc(c);return `<div class="card"><h2>🛒 Your cart</h2><div class="tw"><table><tr><th>Food</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr>${c.map(i=>`<tr><td>${esc(i.name)}</td><td>₹${i.price}</td><td><button class="q" onclick="qty(${i.id},-1)">−</button> ${i.quantity} <button class="q" onclick="qty(${i.id},1)">+</button></td><td>₹${i.price*i.quantity}</td><td><button class="danger" onclick="qty(${i.id},-999)">Remove</button></td></tr>`).join('')}</table></div><div class="row"><input id="cp" placeholder="Coupon code (try CANTEEN10)" value="${esc(coupon)}"><button class="btn" onclick="applyCp()" style="flex:0 0 auto;margin-bottom:14px">Apply</button></div><p>Subtotal: ₹${k.s}</p>${k.d?`<p>Discount: −₹${k.d}</p>`:''}<p>GST (5%): ₹${k.g}</p><h2>Total: ₹${k.t}</h2><button class="btn o" onclick="go('menu')">Continue shopping</button><button class="btn" onclick="go('payment')">Proceed to payment</button></div>`},
+payment(){const c=cart();if(!c.length)return V.cart();const k=calc(c),u=get('users').find(x=>x.email===me);return `<div class="card" style="max-width:520px;margin:auto"><h2>💳 Payment</h2><h3>Total amount: ₹${k.t}</h3><form onsubmit="pay(event)"><label>Customer name</label><input id="cn" required value="${esc(u?u.name:'')}"><label>Pickup time</label><select id="pt"><option>As soon as possible</option><option>In 15 minutes</option><option>In 30 minutes</option><option>In 1 hour</option></select><label>Payment method</label><select id="pm" required><option value="">Select payment</option><option>UPI Demo</option><option>Cash at Counter</option><option>Card Demo</option></select><button class="btn">Confirm order</button></form></div>`},
+bill(){const b=get('lastBill',null);if(!b||b.user!==me)return `<div class="card"><h2>No bill available</h2></div>`;return `<div class="card" style="max-width:640px;margin:auto"><h2>🌿 DIGITAL CANTEEN</h2><h3>Customer bill · Token ${b.token||''}</h3><p>Order ID: ${b.id}</p><p>Customer: ${esc(b.customer)}</p><p>Date: ${b.date}</p><p>Pickup: ${esc(b.pickup||'As soon as possible')}</p><div class="tw"><table><tr><th>Food</th><th>Qty</th><th>Amount</th></tr>${b.items.map(i=>`<tr><td>${esc(i.name)}</td><td>${i.quantity}</td><td>₹${i.price*i.quantity}</td></tr>`).join('')}</table></div>${b.sub!=null?`<p>Subtotal: ₹${b.sub}</p>${b.disc?`<p>Discount: −₹${b.disc}</p>`:''}<p>GST (5%): ₹${b.gst}</p>`:''}<h2>Total: ₹${b.total}</h2><p>Payment: ${esc(b.payment)} · Status: ${b.status}</p><h3>Thank you! Visit again.</h3><button class="btn np" onclick="window.print()">Print bill</button><button class="btn np" onclick="go('home')">Home</button></div>`},
+history(){const l=get('orders').filter(o=>o.user===me).reverse();return `<div class="card"><h2>📋 My orders</h2>${l.length?'<p class="mt">Track each order from kitchen to counter.</p>':'<p>No orders yet. Your first order will show up here.</p>'}</div>`+l.map(o=>`<div class="card"><h3>${o.token||'#'+o.id} · ₹${o.total}</h3><p class="mt">${o.date}<br>${esc(o.items.map(i=>i.quantity+'× '+i.name).join(', '))}</p>${stepper(o)}<button class="btn" onclick="viewBill(${o.id})">View bill</button><button class="btn o" onclick="reorder(${o.id})">Reorder</button></div>`).join('')},
+admin(){const f=get('foods'),o=get('orders'),rev=o.reduce((a,x)=>a+x.total,0);return `<div class="grid"><div class="card stat"><h2>${o.length}</h2>Orders</div><div class="card stat"><h2>₹${rev}</h2>Revenue</div><div class="card stat"><h2>${f.length}</h2>Menu items</div></div>
+<div class="card"><h2>⚙️ Add new food</h2><form onsubmit="addFood(event)"><label>Food name</label><input id="nn" required><label>Price</label><input id="np" type="number" min="1" required><label>Category</label><select id="nc">${CATS.map(c=>`<option>${c}</option>`).join('')}</select><label>Emoji (optional)</label><input id="ne" maxlength="2"><label>Image URL (optional, https)</label><input id="ni" type="url"><label>Type</label><select id="nv"><option value="1">Veg</option><option value="0">Non-veg</option></select><button class="btn">Add food</button></form></div>
+<div class="card"><h2>Manage food items</h2><div class="tw"><table><tr><th>Food</th><th>Price</th><th>Category</th><th></th></tr>${f.map(x=>`<tr><td>${esc(x.name)}</td><td>₹${x.price}</td><td>${x.category}</td><td><button class="danger" onclick="delFood(${x.id})">Delete</button></td></tr>`).join('')}</table></div></div>
+<div class="card"><h2>All customer orders</h2><div class="tw"><table><tr><th>Token</th><th>Customer</th><th>Total</th><th>Pickup</th><th>Status</th></tr>${o.slice().reverse().map(x=>`<tr><td>${x.token||x.id}</td><td>${esc(x.customer)}</td><td>₹${x.total}</td><td>${esc(x.pickup||'-')}</td><td><select onchange="setSt(${x.id},this.value)" style="margin:0">${ST.map(s=>`<option ${s===x.status?'selected':''}>${s}</option>`).join('')}</select></td></tr>`).join('')||'<tr><td colspan="5">No orders yet</td></tr>'}</table></div><button class="btn" onclick="logout()">Logout admin</button></div>`}
+};
+
+function reg(e){e.preventDefault();const em=$('re').value.trim().toLowerCase(),u=get('users');if(u.some(x=>x.email===em))return toast('Email already registered. Try logging in.');u.push({name:$('rn').value.trim(),email:em,password:$('rp').value});set('users',u);toast('Registration successful');go('login')}
+function login(e){e.preventDefault();const em=$('le').value.trim().toLowerCase(),u=get('users').find(x=>x.email===em&&x.password===$('lp').value);if(!u)return toast('Invalid email or password');me=em;set('currentUser',em);toast('Welcome '+u.name);go('home')}
+function adminLogin(e){e.preventDefault();if($('an').value==='admin'&&$('ap').value==='admin123'){admin=true;me='';toast('Admin login successful');go('admin')}else toast('Invalid admin login')}
+function logout(){me='';admin=false;set('currentUser','');go('launch')}
+function showFoods(){const d=$('fd');if(!d)return;const s=$('sort').value;let l=get('foods').filter(f=>f.name.toLowerCase().includes($('q').value.toLowerCase())&&(cat==='All'||(cat==='Favourites'?favs().includes(f.id):f.category===cat))&&($('vf').value!=='v'||f.veg!==false));if(s)l.sort((a,b)=>s==='l'?a.price-b.price:b.price-a.price);d.innerHTML=l.length?l.map(card).join(''):'<div class="card">No food items found. Try another search or category.</div>'}
+function add(id){if(!me){toast('Please log in to order');return go('login')}const f=get('foods').find(x=>x.id===id);if(!f)return;const c=cart(),i=c.find(x=>x.id===id);i?i.quantity++:c.push({id,name:f.name,price:f.price,quantity:1});saveCart(c);toast(f.name+' added to cart')}
+function fav(id){if(!me){toast('Please log in to save favourites');return go('login')}let f=favs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];set('fav_'+me,f);cur==='menu'?showFoods():go(cur)}
+function qty(id,a){let c=cart();const i=c.find(x=>x.id===id);if(!i)return;i.quantity+=a;c=c.filter(x=>x.quantity>0);saveCart(c);go('cart')}
+function applyCp(){const v=$('cp').value.trim().toUpperCase();if(v&&v!=='CANTEEN10'){coupon='';toast('Invalid coupon code')}else{coupon=v;toast(v?'Coupon applied: 10% off':'Coupon removed')}go('cart')}
+function pay(e){e.preventDefault();const c=cart();if(!c.length)return;const k=calc(c),os=get('orders'),o={id:Date.now(),token:'T'+(101+os.length),user:me,customer:$('cn').value,items:c,sub:k.s,disc:k.d,gst:k.g,total:k.t,pickup:$('pt').value,payment:$('pm').value,date:new Date().toLocaleString(),status:'Confirmed'};os.push(o);set('orders',os);set('lastBill',o);coupon='';saveCart([]);toast('Order placed. Your token is '+o.token);go('bill')}
+function viewBill(id){set('lastBill',get('orders').find(o=>o.id===id));go('bill')}
+function reorder(id){const o=get('orders').find(x=>x.id===id);if(o){saveCart(o.items.map(i=>({...i})));go('cart')}}
+function addFood(e){e.preventDefault();const f=get('foods'),n=$('nn').value.trim(),p=+$('np').value;if(!n||p<=0)return;f.push({id:Date.now(),name:n,price:p,category:$('nc').value,emoji:$('ne').value.trim(),img:$('ni').value.trim(),veg:$('nv').value==='1'});set('foods',f);toast('Food added');go('admin')}
+function delFood(id){if(!confirm('Delete this food item?'))return;set('foods',get('foods').filter(f=>f.id!==id));go('admin')}
+function setSt(id,s){const o=get('orders');const x=o.find(y=>y.id===id);if(x){x.status=s;set('orders',o);toast('Status updated to '+s)}}
+go(me?'home':'launch');
+</script>
+</body>
+</html>
